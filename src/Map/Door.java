@@ -29,5 +29,20 @@ public class Door {
       new ShowMessage(ShowMessage.BUG_MESSAGE, message).execute();
     }
   }
-
+  public int getXForRoom(int roomNumber){
+    if(roomNumber==room1)
+      return x1;
+    else if(roomNumber==room2)
+      return x2;
+    else
+      return -1;
+  }
+  public int getYForRoom(int roomNumber){
+    if(roomNumber==room1)
+      return y1;
+    else if(roomNumber==room2)
+      return y2;
+    else
+      return -1;
+  }
 }

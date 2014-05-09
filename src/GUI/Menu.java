@@ -23,4 +23,5 @@ public abstract class Menu extends JPanel {
   abstract void initButtons();
 
   abstract void addButtons();
+  public abstract  void addControllers();
 }

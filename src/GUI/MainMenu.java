@@ -1,6 +1,7 @@
 package GUI;
 
 import Controller.GameEngine;
+import Controller.MainMenuController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,8 +30,11 @@ public class MainMenu extends Menu {
   void initButtons() {
     start = new JButton("START");
     exit = new JButton("EXIT");
-    exit.addActionListener(new ButtonHandler());
-    start.addActionListener(new ButtonHandler());
+  }
+
+  public void addControllers() {
+    exit.addActionListener(new MainMenuController(gameEngine));
+    start.addActionListener(new MainMenuController(gameEngine));
   }
 
   void addButtons() {
@@ -39,16 +43,5 @@ public class MainMenu extends Menu {
 
   }
 
-  class ButtonHandler implements ActionListener {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      String buttonText = ((JButton) e.getSource()).getText();
-      gameEngine.resetFocusToFrame();
-      if (buttonText.equals("EXIT"))
-        System.exit(1);
-      else if (buttonText.equals("START"))
-        gameEngine.startGame();
-    }
-  }
 }

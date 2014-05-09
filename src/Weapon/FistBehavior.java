@@ -2,6 +2,6 @@ package Weapon;
 
 public class FistBehavior implements WeaponBehavior {
 
-  public Integer newAttr;
+  private final int range=1;
 
 }

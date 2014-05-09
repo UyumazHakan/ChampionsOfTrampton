@@ -14,4 +14,12 @@ public class Tower {
     this.damageAmount = damageAmount;
     this.range = range;
   }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
 }

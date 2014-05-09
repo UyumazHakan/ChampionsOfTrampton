@@ -1,6 +1,7 @@
 package GUI;
 
 import Controller.GameEngine;
+import Controller.PauseMenuController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,7 @@ public class PauseMenu extends Menu {
 
   void initButtons() {
     exit = new JButton("EXIT");
-    exit.addActionListener(new ButtonHandler());
+
   }
 
   void addButtons() {
@@ -37,14 +38,10 @@ public class PauseMenu extends Menu {
 
   }
 
-  class ButtonHandler implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      String buttonText = ((JButton) e.getSource()).getText();
-      gameEngine.resetFocusToFrame();
-      if (buttonText.equals("EXIT"))
-        System.exit(1);
-    }
+  @Override
+  public void addControllers() {
+    exit.addActionListener(new PauseMenuController(gameEngine));
   }
+
+
 }

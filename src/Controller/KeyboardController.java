@@ -9,18 +9,17 @@ import java.awt.event.KeyListener;
 /**
  * Created by Hakan on 8.5.2014.
  */
-public class GameController extends KeyAdapter {
-  private GameScreen screen;
-  public GameController(){
-    System.out.println("Imp");
+public class KeyboardController extends KeyAdapter {
+  private GameEngine gameEngine;
+  public KeyboardController(GameEngine gameEngine){
+    this.gameEngine=gameEngine;
+
   }
 
   public void keyPressed(KeyEvent e) {
-    System.out.println("YESY");
     if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
     {
-
-      System.exit(1);
+      gameEngine.togglePauseGame();
     }
   }
 

@@ -7,14 +7,30 @@ import java.util.ArrayList;
  */
 public class Room {
   private ArrayList<Tower> towers;
+
+
+
   private ArrayList<Door> doors;
   private int width;
   private int height;
-  public Room(int width, int height) {
+  private int roomNumber;
+  public Room(int width, int height,int roomNumber) {
     towers=new ArrayList<Tower>();
     doors=new ArrayList<Door>();
     this.width = width;
     this.height = height;
+    this.roomNumber=roomNumber;
+  }
+
+  public ArrayList<Tower> getTowers() {
+    return towers;
+  }
+
+  public ArrayList<Door> getDoors() {
+    return doors;
+  }
+  public int getRoomNumber() {
+    return roomNumber;
   }
   public void addCommonTower(int x,int y){
     towers.add(new CommonTower(x,y));

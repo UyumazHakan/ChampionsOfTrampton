@@ -1,5 +1,7 @@
 package GUI;
 
+import Controller.ControlPanelController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,12 +45,15 @@ public class ControlPanel extends Menu {
     left = new JButton("LEFT");
     right = new JButton("RIGHT");
     attack = new JButton("ATTACK");
-    up.addActionListener(new ButtonHandler());
-    down.addActionListener(new ButtonHandler());
-    left.addActionListener(new ButtonHandler());
-    right.addActionListener(new ButtonHandler());
-    attack.addActionListener(new ButtonHandler());
 
+  }
+
+  public void addControllers() {
+    up.addActionListener(new ControlPanelController(gameEngine));
+    down.addActionListener(new ControlPanelController(gameEngine));
+    left.addActionListener(new ControlPanelController(gameEngine));
+    right.addActionListener(new ControlPanelController(gameEngine));
+    attack.addActionListener(new ControlPanelController(gameEngine));
   }
 
   void addButtons() {
@@ -58,12 +63,5 @@ public class ControlPanel extends Menu {
     add(right);
     add(attack);
   }
-  class ButtonHandler implements ActionListener {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      String buttonText = ((JButton) e.getSource()).getText();
-      gameEngine.resetFocusToFrame();
-    }
-  }
 }
