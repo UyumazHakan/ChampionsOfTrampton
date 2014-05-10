@@ -62,6 +62,15 @@ public class Room {
   }
 
   public void eraseCharacters(){
+      for(PlayableCharacter character:characters){
+        for(Door door:doors){
+          boolean isSameX = door.getXForRoom(roomNumber) == character.getX();
+          boolean isSameY = door.getYForRoom(roomNumber) == character.getY();
+          if(isSameX && isSameY){
+            door.enterDoor(character,roomNumber);
+          }
+        }
+      }
     characters.clear();
   }
   public void addCharacter(PlayableCharacter newCharacter){
