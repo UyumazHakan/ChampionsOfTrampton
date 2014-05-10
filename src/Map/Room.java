@@ -1,5 +1,7 @@
 package Map;
 
+import PlayableCharacter.PlayableCharacter;
+
 import java.util.ArrayList;
 
 /**
@@ -7,19 +9,20 @@ import java.util.ArrayList;
  */
 public class Room {
   private ArrayList<Tower> towers;
-
-
+  private ArrayList<PlayableCharacter> characters;
 
   private ArrayList<Door> doors;
   private int width;
   private int height;
   private int roomNumber;
-  public Room(int width, int height,int roomNumber) {
-    towers=new ArrayList<Tower>();
-    doors=new ArrayList<Door>();
+
+  public Room(int width, int height, int roomNumber) {
+    this.characters=new ArrayList<PlayableCharacter>();
+    this.towers = new ArrayList<Tower>();
+    this.doors = new ArrayList<Door>();
     this.width = width;
     this.height = height;
-    this.roomNumber=roomNumber;
+    this.roomNumber = roomNumber;
   }
 
   public ArrayList<Tower> getTowers() {
@@ -29,16 +32,24 @@ public class Room {
   public ArrayList<Door> getDoors() {
     return doors;
   }
+
+  public ArrayList<PlayableCharacter> getCharacters() {
+    return characters;
+  }
+
   public int getRoomNumber() {
     return roomNumber;
   }
-  public void addCommonTower(int x,int y){
-    towers.add(new CommonTower(x,y));
+
+  public void addCommonTower(int x, int y) {
+    towers.add(new CommonTower(x, y));
   }
-  public void addDoor(Door door){
+
+  public void addDoor(Door door) {
     doors.add(door);
   }
-  public int getNumDoors(){
+
+  public int getNumDoors() {
     return doors.size();
   }
 
@@ -48,5 +59,12 @@ public class Room {
 
   public int getHeight() {
     return height;
+  }
+
+  public void eraseCharacters(){
+    characters.clear();
+  }
+  public void addCharacter(PlayableCharacter newCharacter){
+    characters.add(newCharacter);
   }
 }

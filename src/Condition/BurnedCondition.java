@@ -1,4 +1,4 @@
 package Condition;
 
-public class BurnedCondition extends  UnhealthyCondition {
+public class BurnedCondition extends UnhealthyCondition {
 }

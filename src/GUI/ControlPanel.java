@@ -4,8 +4,6 @@ import Controller.ControlPanelController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ControlPanel extends Menu {
   private int upHeight = 80, upWidth = 50, upX = 120, upY = 10;

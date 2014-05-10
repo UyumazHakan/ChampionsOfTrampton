@@ -18,16 +18,8 @@ public class GameScreen extends JFrame {
   private int controlPanelHeight = 200, controlPanelX = 0;
   private int pauseMenuX, pauseMenuY, pauseMenuWidth = 200, pauseMenuHeight = 500;
   private int mainMenuX, mainMenuY, mainMenuWidth = 400, mainMenuHeight = 500;
-  private int mapScreenX=0,mapScreenY=0,mapScreenWidth,mapScreenHeight;
+  private int mapScreenX = 0, mapScreenY = 0, mapScreenWidth, mapScreenHeight;
   private GameEngine gameEngine;
-
-  public void setGameEngine(GameEngine gameEngine) {
-    mainMenu.setGameEngine(gameEngine);
-    pauseMenu.setGameEngine(gameEngine);
-    controlPanel.setGameEngine(gameEngine);
-    mapScreen.setGameEngine(gameEngine);
-    this.gameEngine = gameEngine;
-  }
 
   public GameScreen() {
     setLayout(null);
@@ -39,12 +31,22 @@ public class GameScreen extends JFrame {
     createPanels();
     addPanels();
   }
-  public void addControllers(){
+
+  public void setGameEngine(GameEngine gameEngine) {
+    mainMenu.setGameEngine(gameEngine);
+    pauseMenu.setGameEngine(gameEngine);
+    controlPanel.setGameEngine(gameEngine);
+    mapScreen.setGameEngine(gameEngine);
+    this.gameEngine = gameEngine;
+  }
+
+  public void addControllers() {
     addKeyListener(new KeyboardController(gameEngine));
     mainMenu.addControllers();
     controlPanel.addControllers();
     pauseMenu.addControllers();
   }
+
   private void addPanels() {
     addControlPanel();
     addPauseMenu();
@@ -55,36 +57,47 @@ public class GameScreen extends JFrame {
   public void showControlPanel() {
     controlPanel.setVisible(true);
   }
+
   public void hideControlPanel() {
     controlPanel.setVisible(false);
   }
+
   public void toggleControlPanel() {
     controlPanel.setVisible(!controlPanel.isVisible());
   }
+
   public void showMainMenu() {
     mainMenu.setVisible(true);
   }
+
   public void hideMainMenu() {
     mainMenu.setVisible(false);
   }
+
   public void toggleMainMenu() {
     mainMenu.setVisible(!mainMenu.isVisible());
   }
+
   public void showPauseMenu() {
     pauseMenu.setVisible(true);
   }
+
   public void hidePauseMenu() {
     pauseMenu.setVisible(false);
   }
+
   public void togglePauseMenu() {
     pauseMenu.setVisible(!pauseMenu.isVisible());
   }
+
   public void showMapScreen() {
     mapScreen.setVisible(true);
   }
+
   public void hideMapScreen() {
     mapScreen.setVisible(false);
   }
+
   public void toggleMapScreen() {
     mapScreen.setVisible(!mapScreen.isVisible());
   }
@@ -106,6 +119,7 @@ public class GameScreen extends JFrame {
     mainMenu.setBounds(mainMenuX, mainMenuY, mainMenuWidth, mainMenuHeight);
     mainMenu.setVisible(true);
   }
+
   private void addMapScreen() {
     add(mapScreen);
     mapScreen.setBounds(mapScreenX, mapScreenY, mapScreenWidth, mapScreenHeight);
@@ -115,7 +129,7 @@ public class GameScreen extends JFrame {
   private void createPanels() {
     pauseMenu = new PauseMenu();
     controlPanel = new ControlPanel(controlPanelWidth, controlPanelHeight);
-    mapScreen=new MapScreen();
+    mapScreen = new MapScreen();
     mainMenu = new MainMenu();
   }
 
@@ -130,10 +144,11 @@ public class GameScreen extends JFrame {
     pauseMenuY = (screenHeight - pauseMenuHeight) / 2;
     mainMenuX = (screenWidth - mainMenuWidth) / 2;
     mainMenuY = (screenHeight - mainMenuHeight) / 2;
-    mapScreenWidth=screenWidth;
-    mapScreenHeight=screenHeight-controlPanelHeight;
+    mapScreenWidth = screenWidth;
+    mapScreenHeight = screenHeight - controlPanelHeight;
   }
-  public void setupRoom(Room room){
+
+  public void setupRoom(Room room) {
     mapScreen.setupNewRoom(room);
   }
 

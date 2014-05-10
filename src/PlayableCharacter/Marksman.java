@@ -1,6 +1,5 @@
 package PlayableCharacter;
 
-import PlayableCharacter.Hero;
 import Weapon.WeaponBehavior;
 
 public class Marksman extends Hero {

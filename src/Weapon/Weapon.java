@@ -1,13 +1,11 @@
 package Weapon;
 
-import PlayableCharacter.*;
-
-import java.util.Vector;
+import PlayableCharacter.PlayableCharacter;
 
 public class Weapon {
 
-    public PlayableCharacter owner;
-    public WeaponBehavior  behaviour;
+  public PlayableCharacter owner;
+  public WeaponBehavior behaviour;
 
   public Weapon(PlayableCharacter owner) {
     this.owner = owner;

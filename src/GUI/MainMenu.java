@@ -1,12 +1,9 @@
 package GUI;
 
-import Controller.GameEngine;
 import Controller.MainMenuController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainMenu extends Menu {
   private final int START_HEIGHT = 50, START_WIDTH = 80, START_X = 10, START_Y = 50;

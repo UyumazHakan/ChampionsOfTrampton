@@ -1,11 +1,9 @@
 package Map;
 
-import java.util.Vector;
-
 public class Tower {
 
-    private int x,y;
-   private int damageAmount;
+  private int x, y;
+  private int damageAmount;
   private int range;
 
   public Tower(int x, int y, int damageAmount, int range) {

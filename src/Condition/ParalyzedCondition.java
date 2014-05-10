@@ -1,4 +1,4 @@
 package Condition;
 
-public class ParalyzedCondition extends  UnhealthyCondition {
+public class ParalyzedCondition extends UnhealthyCondition {
 }

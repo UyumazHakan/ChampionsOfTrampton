@@ -1,14 +1,15 @@
 package Map;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class MapFactory {
 
-  public MapFactory(){
+  public MapFactory() {
 
   }
-  public Map createMap(int numRooms){
-    return new Map(numRooms);
+
+  public Map createMap(int numRooms, ArrayList characters) {
+    return new Map(numRooms, characters);
   }
 
 }

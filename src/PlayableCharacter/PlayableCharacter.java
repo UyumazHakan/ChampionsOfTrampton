@@ -1,37 +1,63 @@
 package PlayableCharacter;
 
-import Condition.*;
-import Weapon.*;
+import Condition.HealthStatus;
+import Condition.HealthyCondition;
+import Weapon.Weapon;
+import Weapon.WeaponBehavior;
 
 public class PlayableCharacter {
 
   private Weapon weapon;
   private HealthStatus healthStatus;
-  private int x,y, roomNumber;
+  private int x, y, roomNumber;
 
   public PlayableCharacter(int x, int y, int roomNumber,
                            WeaponBehavior weaponBehavior) {
     this.x = x;
     this.y = y;
     this.roomNumber = roomNumber;
-    this.weapon=new Weapon(this);
-    this.healthStatus=new HealthyCondition();
+    this.weapon = new Weapon(this);
+    this.healthStatus = new HealthyCondition();
 
   }
-  public void changeWeaponBehavior(WeaponBehavior weaponBehavior){
+
+  public void changeWeaponBehavior(WeaponBehavior weaponBehavior) {
     this.weapon.setWeaponBehaviour(weaponBehavior);
   }
-  public void move(int dx,int dy){
-    this.x+=dx;
-    this.y+=dy;
+
+  public void move(int dx, int dy) {
+    this.x += dx;
+    this.y += dy;
   }
-  public void setLocation(int x,int y){
-    this.x=x;
-    this.y=y;
+
+  public void moveX(int dx) {
+    this.x += dx;
   }
-  public void changeRoom(int x,int y, int roomNumber){
-    this.x=x;
-    this.y=y;
-    this.roomNumber=roomNumber;
+
+  public void moveY(int dy) {
+    this.y += dy;
+  }
+
+  public void setLocation(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public void changeRoom(int x, int y, int roomNumber) {
+    this.x = x;
+    this.y = y;
+    this.roomNumber = roomNumber;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public int getRoomNumber() {
+    return roomNumber;
   }
 }

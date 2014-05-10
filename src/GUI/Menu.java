@@ -14,8 +14,8 @@ public abstract class Menu extends JPanel {
     setLayout(null);
   }
 
-  public void setGameEngine(GameEngine gameEngine){
-    this.gameEngine=gameEngine;
+  public void setGameEngine(GameEngine gameEngine) {
+    this.gameEngine = gameEngine;
   }
 
   abstract void setButtonLocations();
@@ -23,5 +23,6 @@ public abstract class Menu extends JPanel {
   abstract void initButtons();
 
   abstract void addButtons();
-  public abstract  void addControllers();
+
+  public abstract void addControllers();
 }
