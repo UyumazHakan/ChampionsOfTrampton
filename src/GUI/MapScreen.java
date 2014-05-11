@@ -11,10 +11,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MapScreen extends JPanel {
-  private final ImageIcon floorImage = new ImageIcon("floor.png");
-  private final ImageIcon heroImage = new ImageIcon("hero.png");
-  private final ImageIcon towerImage = new ImageIcon("tower.png");
-  private final ImageIcon doorImage = new ImageIcon("door.png");
+  private final ImageIcon floorImage = new ImageIcon("images/floor.png");
+  private final ImageIcon heroImage = new ImageIcon("images/hero.png");
+  private final ImageIcon towerImage = new ImageIcon("images/tower.png");
+  private final ImageIcon doorImage = new ImageIcon("images/door.png");
   private JLabel[][] tiles;
   private GameEngine gameEngine;
   private int mapWidth;
@@ -88,10 +88,7 @@ public class MapScreen extends JPanel {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[0].length; j++) {
         JLabel tile = tiles[i][j];
-        if(tile!=null) {
-          remove(tile);
-          System.out.println("i:"+i+"j:"+j);
-        }
+        if(tile!=null) remove(tile);
       }
     }
   }

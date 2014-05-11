@@ -23,7 +23,7 @@ public class GameScreen extends JFrame {
 
   public GameScreen() {
     setLayout(null);
-    setUndecorated(false);
+    setUndecorated(true);
     setFocusable(true);
     requestFocusInWindow();
 
