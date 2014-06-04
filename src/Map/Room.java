@@ -17,7 +17,7 @@ public class Room {
   private int roomNumber;
 
   public Room(int width, int height, int roomNumber) {
-    this.characters=new ArrayList<PlayableCharacter>();
+    this.characters = new ArrayList<PlayableCharacter>();
     this.towers = new ArrayList<Tower>();
     this.doors = new ArrayList<Door>();
     this.width = width;
@@ -61,19 +61,20 @@ public class Room {
     return height;
   }
 
-  public void eraseCharacters(){
-      for(PlayableCharacter character:characters){
-        for(Door door:doors){
-          boolean isSameX = door.getXForRoom(roomNumber) == character.getX();
-          boolean isSameY = door.getYForRoom(roomNumber) == character.getY();
-          if(isSameX && isSameY){
-            door.enterDoor(character,roomNumber);
-          }
+  public void eraseCharacters() {
+    for (PlayableCharacter character : characters) {
+      for (Door door : doors) {
+        boolean isSameX = door.getXForRoom(roomNumber) == character.getX();
+        boolean isSameY = door.getYForRoom(roomNumber) == character.getY();
+        if (isSameX && isSameY) {
+          door.enterDoor(character, roomNumber);
         }
       }
+    }
     characters.clear();
   }
-  public void addCharacter(PlayableCharacter newCharacter){
+
+  public void addCharacter(PlayableCharacter newCharacter) {
     characters.add(newCharacter);
   }
 }

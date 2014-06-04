@@ -11,14 +11,15 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MapScreen extends JPanel {
-  private final ImageIcon floorImage = new ImageIcon("images/floor.png");
-  private final ImageIcon heroImage = new ImageIcon("images/hero.png");
-  private final ImageIcon towerImage = new ImageIcon("images/tower.png");
-  private final ImageIcon doorImage = new ImageIcon("images/door.png");
+  private  ImageIcon floorImage = new ImageIcon("images/floor.png");
+  private  ImageIcon heroImage = new ImageIcon("images/hero.png");
+  private  ImageIcon towerImage = new ImageIcon("images/tower.png");
+  private  ImageIcon doorImage = new ImageIcon("images/door.png");
   private JLabel[][] tiles;
   private GameEngine gameEngine;
   private int mapWidth;
   private int mapHeight;
+    private Room room;
 
   public MapScreen() {
     setLayout(null);
@@ -31,9 +32,10 @@ public class MapScreen extends JPanel {
   }
 
   public void setupNewRoom(Room room) {
+      this.room=room;
     reset();
     tiles = new JLabel[room.getWidth()][room.getHeight()];
-
+      setSizeOfImages();
     setupFloors();
     setupDoors(room.getDoors(), room.getRoomNumber());
     setupTowers(room.getTowers());
@@ -41,9 +43,23 @@ public class MapScreen extends JPanel {
     reset();
     drawRoom();
 
+
   }
 
-  private void setupFloors() {
+    private void setSizeOfImages() {
+        floorImage = new ImageIcon(getResizedImage(floorImage.getImage()));
+        doorImage = new ImageIcon((getResizedImage(doorImage.getImage())));
+        heroImage = new ImageIcon((getResizedImage(heroImage.getImage())));
+    }
+
+    private Image getResizedImage(Image imageToResized) {
+        Image img = imageToResized;
+        int tileWidth = getWidth() / tiles.length;
+        int tileHeight = getHeight() / tiles[0].length;
+        return img.getScaledInstance(tileWidth, tileHeight,  Image.SCALE_SMOOTH);
+    }
+
+    private void setupFloors() {
 
     for (int i = 0; i < tiles.length; i++)
       for (int j = 0; j < tiles[0].length; j++)
@@ -61,7 +77,11 @@ public class MapScreen extends JPanel {
     for (Door door : doors) {
       int x = door.getXForRoom(roomNumber);
       int y = door.getYForRoom(roomNumber);
-      tiles[x][y] = new JLabel(doorImage);
+      try {
+          tiles[x][y] = new JLabel(doorImage);
+      }catch (Exception e){
+          System.out.println(x +"-"+tiles.length+"-"+room.getWidth()+" "+y+"-"+tiles[0].length+"-"+room.getHeight());
+      }
     }
   }
 
@@ -76,6 +96,7 @@ public class MapScreen extends JPanel {
   private void drawRoom() {
     int tileWidth = getWidth() / tiles.length;
     int tileHeight = getHeight() / tiles[0].length;
+      System.out.println(tileWidth);
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[0].length; j++) {
         JLabel tile = tiles[i][j];

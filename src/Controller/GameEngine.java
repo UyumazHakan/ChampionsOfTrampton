@@ -41,11 +41,13 @@ public class GameEngine {
 
   }
   public void updateMapScreen(){
-    int roomNumber = playersHero.getRoomNumber();
-    Room room =  map.getRoom(roomNumber);
+
+
     map.update();
+      int roomNumber = playersHero.getRoomNumber();
+      Room room =  map.getRoom(roomNumber);
     screen.setupRoom(room);
-    System.out.println("herox:"+playersHero.getX()+" heroy:"+playersHero.getY());
+    System.out.println("herox:"+playersHero.getX()+" heroy:"+playersHero.getY()+" room:"+playersHero.getRoomNumber());
   }
   public void stepUpHero(){
     moveYCharacter(-1, playersHero);
