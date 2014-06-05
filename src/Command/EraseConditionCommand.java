@@ -1,6 +1,6 @@
 package Command;
 
-public class AddCondition implements Command {
+public class EraseConditionCommand implements Command {
   @Override
   public void execute() {
 

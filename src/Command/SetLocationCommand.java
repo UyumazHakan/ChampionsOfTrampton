@@ -19,6 +19,7 @@ public class SetLocationCommand implements Command {
   public void execute() {
     character.setLocation(x, y);
   }
+
   public void networkExecute() {
     character.setLocation(x, y);
   }

@@ -11,8 +11,14 @@ public class Hero extends PlayableCharacter {
   private int id;
   private ImageIcon icon;
 
-  public void setTarget(Hero target) {
-    this.target = target;
+  public Hero(WeaponBehavior weaponBehavior, int id, ImageIcon icon) {
+    super(weaponBehavior);
+    maxTurn = 20;
+    presentTurn = 20;
+    this.id = id;
+    this.icon = icon;
+
+
   }
 
   public int getPresentTurn() {
@@ -27,19 +33,15 @@ public class Hero extends PlayableCharacter {
     return target;
   }
 
-  public Hero(int x, int y, int roomNumber, WeaponBehavior weaponBehavior,int id,ImageIcon icon) {
-    super(x, y, roomNumber, weaponBehavior);
-    maxTurn=20;
-    presentTurn=20;
-    this.id=id;
-    this.icon=icon;
-
-
+  public void setTarget(Hero target) {
+    this.target = target;
   }
-  public void resetTurn(){
-    presentTurn=maxTurn;
+
+  public void resetTurn() {
+    presentTurn = maxTurn;
   }
-  public void decreaseTurn(){
+
+  public void decreaseTurn() {
     presentTurn--;
   }
 

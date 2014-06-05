@@ -1,6 +1,4 @@
-package Command;
-
-import Condition.UnhealthyCondition;
+package Condition;
 
 public class FrozenCondition extends UnhealthyCondition {
 }

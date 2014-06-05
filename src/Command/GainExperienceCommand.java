@@ -1,6 +1,6 @@
 package Command;
 
-public class GainExperience implements Command {
+public class GainExperienceCommand implements Command {
   @Override
   public void execute() {
 

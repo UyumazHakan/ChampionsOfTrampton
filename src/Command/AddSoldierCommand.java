@@ -1,6 +1,6 @@
 package Command;
 
-public class AddSoldier implements Command {
+public class AddSoldierCommand implements Command {
   @Override
   public void execute() {
 

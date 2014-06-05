@@ -1,9 +1,9 @@
 package PlayableCharacter;
 
-import Weapon.*;
+import Weapon.KnifeBehavior;
 
 public class Brigand extends Hero {
-  public Brigand(int x, int y, int roomNumber,int id) {
-    super(x, y, roomNumber, new KnifeBehavior(),id,null);
+  public Brigand(int id) {
+    super(new KnifeBehavior(), id, null);
   }
 }

@@ -17,6 +17,7 @@ public class MoveCharacterCommand implements Command {
     character.move(x, y);
     character.decreaseTurn();
   }
+
   public void networkExecute() {
     execute();
   }

@@ -12,11 +12,7 @@ public class PlayableCharacter {
   private int x, y, roomNumber;
 
 
-  public PlayableCharacter(int x, int y, int roomNumber,
-                           WeaponBehavior weaponBehavior) {
-    this.x = x;
-    this.y = y;
-    this.roomNumber = roomNumber;
+  public PlayableCharacter(WeaponBehavior weaponBehavior) {
     this.weapon = new Weapon(this);
     this.healthStatus = new HealthyCondition();
 

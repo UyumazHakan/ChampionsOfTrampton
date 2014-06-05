@@ -1,6 +1,6 @@
 package Map;
 
-import Command.ShowMessage;
+import Command.ChangeRoomCommand;
 import PlayableCharacter.PlayableCharacter;
 
 /**
@@ -21,14 +21,9 @@ public class Door {
 
   public void enterDoor(PlayableCharacter character, int roomNumber) {
     if (roomNumber == room1)
-      character.changeRoom(x2, y2, room2);
+      new ChangeRoomCommand(character, x2, y2, room2).networkExecute();
     else if (roomNumber == room2)
-      character.changeRoom(x1, y1, room1);
-    else {
-      String message = "Door rooms: " + room1 + " , " + room2 + " - Door locations: (" + x1 + " , " + y1 + ") , (" + x2 + " , " + y2 + ")\n";
-      message += "Character room: " + roomNumber;
-      new ShowMessage(ShowMessage.BUG_MESSAGE, message).execute();
-    }
+      new ChangeRoomCommand(character, x1, y1, room1).networkExecute();
   }
 
   public int getXForRoom(int roomNumber) {

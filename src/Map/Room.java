@@ -61,6 +61,13 @@ public class Room {
     return height;
   }
 
+  public PlayableCharacter getCharacterAtLocation(int x, int y) {
+    for (PlayableCharacter character : characters)
+      if (character.getX() == x && character.getY() == y)
+        return character;
+    return null;
+  }
+
   public void eraseCharacters() {
     for (PlayableCharacter character : characters) {
       for (Door door : doors) {

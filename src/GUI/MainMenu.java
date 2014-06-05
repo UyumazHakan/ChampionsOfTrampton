@@ -3,17 +3,19 @@ package GUI;
 import Controller.MainMenuController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class MainMenu extends Menu {
-  private final int START_HEIGHT = 50, START_WIDTH = 80, START_X = 10, START_Y = 50;
-  private final int EXIT_HEIGHT = 50, EXIT_WIDTH = 80, EXIT_X = 10, EXIT_Y = 450;
+  private final int START_HEIGHT = 50, START_WIDTH = 80, START_X = 160, START_Y = 230;
+  private final int EXIT_HEIGHT = 50, EXIT_WIDTH = 80, EXIT_X = 160, EXIT_Y = 300;
   private JButton exit;
   private JButton start;
 
   public MainMenu() {
     super();
-    setBackground(Color.GREEN);
+    setBackground(Color.white);
+    setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
     initButtons();
     setButtonLocations();
     addButtons();

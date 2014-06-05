@@ -23,6 +23,10 @@ public class Map {
     return rooms.get(roomNum);
   }
 
+  public int getNumRooms() {
+    return rooms.size();
+  }
+
   public ArrayList<PlayableCharacter> getCharacters() {
     return characters;
   }
@@ -46,11 +50,11 @@ public class Map {
     int otherRoomNumber = random.nextInt(rooms.size());
     if (otherRoomNumber == roomNumber)
       otherRoomNumber = (otherRoomNumber + 1) % rooms.size();
-    int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+    int x1, x2, y1, y2;
     Room room1 = rooms.get(roomNumber);
     Room room2 = rooms.get(otherRoomNumber);
-        x1 = random.nextInt(room1.getWidth() - 1);
-        y1 = random.nextInt(room1.getHeight() - 1);
+    x1 = random.nextInt(room1.getWidth() - 1);
+    y1 = random.nextInt(room1.getHeight() - 1);
     x2 = random.nextInt(room2.getWidth() - 1);
     y2 = random.nextInt(room2.getHeight() - 1);
     Door door = new Door(x1, y1, x2, y2, roomNumber, otherRoomNumber);
@@ -69,6 +73,10 @@ public class Map {
       Room room = rooms.get(roomNumber);
       room.addCharacter(character);
     }
+  }
+
+  public PlayableCharacter getCharacterAtLocation(int x, int y, int room) {
+    return rooms.get(room).getCharacterAtLocation(x, y);
   }
 
   private void eraseCharacters() {

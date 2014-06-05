@@ -1,6 +1,6 @@
 package Command;
 
-public class GainGold implements Command {
+public class ChangeHealthCommand implements Command {
   @Override
   public void execute() {
 

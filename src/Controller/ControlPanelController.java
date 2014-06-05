@@ -13,25 +13,61 @@ public class ControlPanelController extends MenuController {
 
   public ControlPanelController(GameEngine gameEngine, ControlPanel controlPanel) {
     super(gameEngine);
-    this.controlPanel=controlPanel;
+    this.controlPanel = controlPanel;
   }
 
   public void actionPerformed(ActionEvent e) {
-    String buttonText = ((JButton) e.getSource()).getText();
+    String buttonText = ((JButton) e.getSource()).getName();
     if (buttonText.equals("UP"))
-      gameEngine.stepUpHero();
+      gameEngine.takeActionUp();
     else if (buttonText.equals("DOWN"))
-      gameEngine.stepDownHero();
+      gameEngine.takeActionDown();
     else if (buttonText.equals("LEFT"))
-      gameEngine.stepLeftHero();
+      gameEngine.takeActionLeft();
     else if (buttonText.equals("RIGHT"))
-      gameEngine.stepRightHero();
+      gameEngine.takeActionRight();
     gameEngine.updateMapScreen();
     gameEngine.resetFocusToFrame();
     gameEngine.updateCurrentHero();
     controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
     controlPanel.setTarget(gameEngine.getTargetIcon());
+    updateButtons();
 
+  }
+
+  private void updateButtons() {
+    updateDownButton();
+    updateLeftButton();
+    updateRightButton();
+    updateUpButton();
+  }
+
+  private void updateUpButton() {
+    if (gameEngine.haveNorthNeighbor())
+      controlPanel.showUpAttack();
+    else
+      controlPanel.showUpMove();
+  }
+
+  private void updateDownButton() {
+    if (gameEngine.haveSouthNeighbor())
+      controlPanel.showDownAttack();
+    else
+      controlPanel.showDownMove();
+  }
+
+  private void updateLeftButton() {
+    if (gameEngine.haveWestNeighbor())
+      controlPanel.showLeftAttack();
+    else
+      controlPanel.showLeftMove();
+  }
+
+  private void updateRightButton() {
+    if (gameEngine.haveEastNeighbor())
+      controlPanel.showRightAttack();
+    else
+      controlPanel.showRightMove();
   }
 
 }
