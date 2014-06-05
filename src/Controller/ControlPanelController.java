@@ -1,5 +1,7 @@
 package Controller;
 
+import GUI.ControlPanel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -7,14 +9,17 @@ import java.awt.event.ActionEvent;
  * Created by Hakan on 8.5.2014.
  */
 public class ControlPanelController extends MenuController {
+  private ControlPanel controlPanel;
 
-
-  public ControlPanelController(GameEngine gameEngine) {
+  public ControlPanelController(GameEngine gameEngine, ControlPanel controlPanel) {
     super(gameEngine);
+    this.controlPanel=controlPanel;
   }
 
   public void actionPerformed(ActionEvent e) {
     String buttonText = ((JButton) e.getSource()).getText();
+    System.out.println("-----"+gameEngine.getCurrentHeroTurn());
+    controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
     if (buttonText.equals("UP"))
       gameEngine.stepUpHero();
     else if (buttonText.equals("DOWN"))

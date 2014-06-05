@@ -16,12 +16,14 @@ public class GameEngine {
   private GameScreen screen;
   private Map map;
   private Hero playersHero;
-  ArrayList<PlayableCharacter> characters;
+  private ArrayList<Hero> characters;
+  private int currentPlayerID;
 
   public GameEngine(GameScreen screen) {
-    characters=new ArrayList<PlayableCharacter>();
-    this.playersHero=new Brigand(2,2,1);
-    characters.add(playersHero);
+    currentPlayerID=0;
+    characters=new ArrayList<Hero>();
+    addHeroes(3);
+    playersHero=characters.get(currentPlayerID);
     this.screen = screen;
     screen.setVisible(true);
     screen.setDefaultCloseOperation(GameScreen.EXIT_ON_CLOSE);
@@ -29,6 +31,11 @@ public class GameEngine {
     screen.addControllers();
     map = new MapFactory().createMap(10,characters);
 
+  }
+
+  private void addHeroes(int numHeroes) {
+    for(int i=0;i<numHeroes;i++)
+      characters.add(new Brigand(i,i,0));
   }
 
   public void startGame() {
@@ -41,8 +48,6 @@ public class GameEngine {
 
   }
   public void updateMapScreen(){
-
-
     map.update();
       int roomNumber = playersHero.getRoomNumber();
       Room room =  map.getRoom(roomNumber);
@@ -51,22 +56,26 @@ public class GameEngine {
   }
   public void stepUpHero(){
     moveYCharacter(-1, playersHero);
+    updateCurrentHero();
   }
   public void stepDownHero(){
     moveYCharacter(1,playersHero);
+    updateCurrentHero();
   }
   public void stepLeftHero(){
     moveXCharacter(-1, playersHero);
+    updateCurrentHero();
   }
   public void stepRightHero(){
     moveXCharacter(1, playersHero);
+    updateCurrentHero();
   }
-  private void moveCharacter(int x, int y, PlayableCharacter character) {
+  private void moveCharacter(int x, int y, Hero character) {
     moveXCharacter(x, character);
     moveYCharacter(y, character);
   }
 
-  private void moveYCharacter(int y, PlayableCharacter character) {
+  private void moveYCharacter(int y, Hero character) {
     Room characterRoom = map.getRoom(character.getRoomNumber());
     int characterNewY = character.getY() + y;
     if (characterNewY < 0)
@@ -77,7 +86,7 @@ public class GameEngine {
       new MoveCharacterYCommand(y, character).networkExecute();
   }
 
-  private void moveXCharacter(int x, PlayableCharacter character) {
+  private void moveXCharacter(int x, Hero character) {
     Room characterRoom = map.getRoom(character.getRoomNumber());
     int characterNewX = character.getX() + x;
     if (characterNewX < 0)
@@ -95,5 +104,15 @@ public class GameEngine {
 
   public void resetFocusToFrame() {
     screen.requestFocusInWindow();
+  }
+  public void updateCurrentHero(){
+    if(playersHero.getPresentTurn()==0){
+      playersHero.resetTurn();
+      currentPlayerID=(currentPlayerID+1)%characters.size();
+      playersHero=characters.get(currentPlayerID);
+    }
+  }
+  public int getCurrentHeroTurn(){
+    return playersHero.getPresentTurn();
   }
 }

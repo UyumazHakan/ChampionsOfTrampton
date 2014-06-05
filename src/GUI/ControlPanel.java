@@ -11,22 +11,39 @@ public class ControlPanel extends Menu {
   private int leftHeight = 50, leftWidth = 80, leftX = 20, leftY = 75;
   private int rightHeight = 50, rightWidth = 80, rightX = 190, rightY = 75;
   private int attackHeight = 50, attackWidth = 50, attackX, attackY = 75;
+  private int turnHeight = 50, turnWidth = 80, turnX = 300, turnY = 75;
   private int panelWidth, panelHeight;
   private JButton up;
   private JButton down;
   private JButton left;
   private JButton right;
   private JButton attack;
+  private JLabel turn;
 
   public ControlPanel(int width, int height) {
     this.panelHeight = height;
     this.panelWidth = width;
     this.attackX = panelWidth - 70;
     setLayout(null);
-    setBackground(Color.BLACK);
+    setBackground(Color.white);
     initButtons();
+    initLabels();
     setButtonLocations();
+    setLabelLocations();
     addButtons();
+    addLabels();
+  }
+
+  private void addLabels() {
+    add(turn);
+  }
+
+  private void setLabelLocations() {
+    turn.setBounds(turnX,turnY,turnWidth,turnHeight);
+  }
+
+  private void initLabels() {
+    turn=new JLabel();
   }
 
   void setButtonLocations() {
@@ -47,11 +64,11 @@ public class ControlPanel extends Menu {
   }
 
   public void addControllers() {
-    up.addActionListener(new ControlPanelController(gameEngine));
-    down.addActionListener(new ControlPanelController(gameEngine));
-    left.addActionListener(new ControlPanelController(gameEngine));
-    right.addActionListener(new ControlPanelController(gameEngine));
-    attack.addActionListener(new ControlPanelController(gameEngine));
+    up.addActionListener(new ControlPanelController(gameEngine,this));
+    down.addActionListener(new ControlPanelController(gameEngine,this));
+    left.addActionListener(new ControlPanelController(gameEngine,this));
+    right.addActionListener(new ControlPanelController(gameEngine,this));
+    attack.addActionListener(new ControlPanelController(gameEngine,this));
   }
 
   void addButtons() {
@@ -60,6 +77,9 @@ public class ControlPanel extends Menu {
     add(left);
     add(right);
     add(attack);
+  }
+  public void changeTurn(int numTurn){
+    turn.setText(""+numTurn);
   }
 
 }

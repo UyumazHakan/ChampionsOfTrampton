@@ -1,12 +1,12 @@
 package Command;
 
-import PlayableCharacter.PlayableCharacter;
+import PlayableCharacter.Hero;
 
 public class MoveCharacterCommand implements Command {
   private int x, y;
-  private PlayableCharacter character;
+  private Hero character;
 
-  public MoveCharacterCommand(int x, int y, PlayableCharacter character) {
+  public MoveCharacterCommand(int x, int y, PlayableCharacter.Hero character) {
     this.x = x;
     this.y = y;
     this.character = character;
@@ -15,8 +15,9 @@ public class MoveCharacterCommand implements Command {
   @Override
   public void execute() {
     character.move(x, y);
+    character.decreaseTurn();
   }
   public void networkExecute() {
-    character.move(x, y);
+    execute();
   }
 }

@@ -11,6 +11,7 @@ public class PlayableCharacter {
   private HealthStatus healthStatus;
   private int x, y, roomNumber;
 
+
   public PlayableCharacter(int x, int y, int roomNumber,
                            WeaponBehavior weaponBehavior) {
     this.x = x;
