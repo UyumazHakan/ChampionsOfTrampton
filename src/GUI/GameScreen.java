@@ -156,4 +156,8 @@ public class GameScreen extends JFrame {
     return new Dimension(800, 600);
 
   }
+
+  public ControlPanel getControlPanel() {
+    return controlPanel;
+  }
 }

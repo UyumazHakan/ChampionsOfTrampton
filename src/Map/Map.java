@@ -49,42 +49,10 @@ public class Map {
     int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
     Room room1 = rooms.get(roomNumber);
     Room room2 = rooms.get(otherRoomNumber);
-    switch (random.nextInt(4)) {
-      case 0:
-        x1 = 0;
-        y1 = random.nextInt(room1.getHeight() - 1);
-        break;
-      case 1:
         x1 = random.nextInt(room1.getWidth() - 1);
-        y1 = 0;
-        break;
-      case 2:
-        x1 = room1.getWidth() - 1;
         y1 = random.nextInt(room1.getHeight() - 1);
-        break;
-      case 3:
-        x1 = random.nextInt(room1.getWidth() - 1);
-        y1 = room1.getHeight() - 1;
-        break;
-    }
-    switch (random.nextInt(4)) {
-      case 0:
-        x2 = 0;
-        y2 = random.nextInt(room2.getHeight() - 1);
-        break;
-      case 1:
-        x2 = random.nextInt(room2.getWidth() - 1);
-        y2 = 0;
-        break;
-      case 2:
-        x2 = room2.getWidth() - 1;
-        y2 = random.nextInt(room2.getHeight() - 1);
-        break;
-      case 3:
-        x2 = random.nextInt(room2.getWidth() - 1);
-        y2 = room1.getHeight() - 1;
-        break;
-    }
+    x2 = random.nextInt(room2.getWidth() - 1);
+    y2 = random.nextInt(room2.getHeight() - 1);
     Door door = new Door(x1, y1, x2, y2, roomNumber, otherRoomNumber);
     room1.addDoor(door);
     room2.addDoor(door);

@@ -11,7 +11,8 @@ public class ControlPanel extends Menu {
   private int leftHeight = 50, leftWidth = 80, leftX = 20, leftY = 75;
   private int rightHeight = 50, rightWidth = 80, rightX = 190, rightY = 75;
   private int attackHeight = 50, attackWidth = 50, attackX, attackY = 75;
-  private int turnHeight = 50, turnWidth = 80, turnX = 300, turnY = 75;
+  private int targetHeight = 100, targetWidth = 100, targetX = 500, targetY = 75;
+  private int turnHeight = 50, turnWidth = 80, turnX = 300, turnY = 70;
   private int panelWidth, panelHeight;
   private JButton up;
   private JButton down;
@@ -19,6 +20,7 @@ public class ControlPanel extends Menu {
   private JButton right;
   private JButton attack;
   private JLabel turn;
+  private JLabel target;
 
   public ControlPanel(int width, int height) {
     this.panelHeight = height;
@@ -36,14 +38,17 @@ public class ControlPanel extends Menu {
 
   private void addLabels() {
     add(turn);
+    add(target);
   }
 
   private void setLabelLocations() {
     turn.setBounds(turnX,turnY,turnWidth,turnHeight);
+    target.setBounds(targetX,targetY,targetWidth,targetHeight);
   }
 
   private void initLabels() {
     turn=new JLabel();
+    target=new JLabel("asd");
   }
 
   void setButtonLocations() {
@@ -82,4 +87,7 @@ public class ControlPanel extends Menu {
     turn.setText(""+numTurn);
   }
 
+  public void setTarget(ImageIcon icon) {
+    this.target.setIcon(icon);
+  }
 }

@@ -10,6 +10,7 @@ import Map.MapFactory;
 import Map.Room;
 import PlayableCharacter.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class GameEngine {
@@ -30,12 +31,18 @@ public class GameEngine {
     screen.setGameEngine(this);
     screen.addControllers();
     map = new MapFactory().createMap(10,characters);
+    screen.getControlPanel().changeTurn(getCurrentHeroTurn());
+    screen.getControlPanel().setTarget(getTargetIcon());
 
   }
 
   private void addHeroes(int numHeroes) {
-    for(int i=0;i<numHeroes;i++)
-      characters.add(new Brigand(i,i,0));
+    characters.add(new Warlord(5,5,5,0));
+    characters.add(new Marksman(1,1,1,0));
+    characters.add(new Phantom(2,2,2,0));
+    for (int i=0;i<numHeroes;i++)
+      characters.get(i).setTarget(characters.get((i+1)%numHeroes));
+
   }
 
   public void startGame() {
@@ -43,8 +50,8 @@ public class GameEngine {
     screen.hidePauseMenu();
     screen.hideMainMenu();
     screen.showMapScreen();
-    Room tryRoom = map.getRoom(1);
-    screen.setupRoom(tryRoom);
+    Room firstRoom = map.getRoom(playersHero.getRoomNumber());
+    screen.setupRoom(firstRoom);
 
   }
   public void updateMapScreen(){
@@ -56,19 +63,15 @@ public class GameEngine {
   }
   public void stepUpHero(){
     moveYCharacter(-1, playersHero);
-    updateCurrentHero();
   }
   public void stepDownHero(){
     moveYCharacter(1,playersHero);
-    updateCurrentHero();
   }
   public void stepLeftHero(){
     moveXCharacter(-1, playersHero);
-    updateCurrentHero();
   }
   public void stepRightHero(){
     moveXCharacter(1, playersHero);
-    updateCurrentHero();
   }
   private void moveCharacter(int x, int y, Hero character) {
     moveXCharacter(x, character);
@@ -110,9 +113,13 @@ public class GameEngine {
       playersHero.resetTurn();
       currentPlayerID=(currentPlayerID+1)%characters.size();
       playersHero=characters.get(currentPlayerID);
+      updateMapScreen();
     }
   }
   public int getCurrentHeroTurn(){
     return playersHero.getPresentTurn();
+  }
+  public ImageIcon getTargetIcon(){
+    return playersHero.getTarget().getIcon();
   }
 }

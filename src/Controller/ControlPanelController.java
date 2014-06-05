@@ -18,8 +18,6 @@ public class ControlPanelController extends MenuController {
 
   public void actionPerformed(ActionEvent e) {
     String buttonText = ((JButton) e.getSource()).getText();
-    System.out.println("-----"+gameEngine.getCurrentHeroTurn());
-    controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
     if (buttonText.equals("UP"))
       gameEngine.stepUpHero();
     else if (buttonText.equals("DOWN"))
@@ -30,6 +28,9 @@ public class ControlPanelController extends MenuController {
       gameEngine.stepRightHero();
     gameEngine.updateMapScreen();
     gameEngine.resetFocusToFrame();
+    gameEngine.updateCurrentHero();
+    controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
+    controlPanel.setTarget(gameEngine.getTargetIcon());
 
   }
 

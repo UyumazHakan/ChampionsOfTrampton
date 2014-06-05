@@ -4,7 +4,7 @@ import Controller.GameEngine;
 import Map.Door;
 import Map.Room;
 import Map.Tower;
-import PlayableCharacter.PlayableCharacter;
+import PlayableCharacter.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class MapScreen extends JPanel {
   private  ImageIcon floorImage = new ImageIcon("images/floor.png");
-  private  ImageIcon heroImage = new ImageIcon("images/hero.png");
   private  ImageIcon towerImage = new ImageIcon("images/tower.png");
   private  ImageIcon doorImage = new ImageIcon("images/door.png");
   private JLabel[][] tiles;
@@ -49,7 +48,6 @@ public class MapScreen extends JPanel {
     private void setSizeOfImages() {
         floorImage = new ImageIcon(getResizedImage(floorImage.getImage()));
         doorImage = new ImageIcon((getResizedImage(doorImage.getImage())));
-        heroImage = new ImageIcon((getResizedImage(heroImage.getImage())));
     }
 
     private Image getResizedImage(Image imageToResized) {
@@ -69,7 +67,9 @@ public class MapScreen extends JPanel {
     for (PlayableCharacter character : characters) {
       int x = character.getX();
       int y = character.getY();
-      tiles[x][y] = new JLabel(heroImage);
+      ImageIcon heroIcon=((Hero)character).getIcon();
+      heroIcon=new ImageIcon(getResizedImage(heroIcon.getImage()));
+      tiles[x][y] = new JLabel(heroIcon);
       System.out.println("x: "+x+" y:"+y);
     }
   }
