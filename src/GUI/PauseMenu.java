@@ -16,7 +16,7 @@ public class PauseMenu extends Menu {
   public PauseMenu() {
     super();
     setBackground(Color.white);
-    setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+    setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
     initButtons();
     setButtonLocations();
     addButtons();

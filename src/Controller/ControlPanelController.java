@@ -31,6 +31,7 @@ public class ControlPanelController extends MenuController {
     gameEngine.updateCurrentHero();
     controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
     controlPanel.setTarget(gameEngine.getTargetIcon());
+    controlPanel.setExperience(gameEngine.getCurrentHeroExperience());
     updateButtons();
 
   }

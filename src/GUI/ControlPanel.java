@@ -12,6 +12,7 @@ public class ControlPanel extends Menu {
   private int rightHeight = 50, rightWidth = 80, rightX = 190, rightY = 75;
   private int targetHeight = 100, targetWidth = 100, targetX = 500, targetY = 75;
   private int turnHeight = 50, turnWidth = 80, turnX = 300, turnY = 70;
+  private int experienceHeight = 50, experienceWidth = 80, experienceX = 300, experienceY = 150;
   private int panelWidth, panelHeight;
   private JButton up;
   private JButton down;
@@ -23,6 +24,7 @@ public class ControlPanel extends Menu {
   private JButton rightAttack;
   private JLabel turn;
   private JLabel target;
+  private JLabel experience;
 
   public ControlPanel(int width, int height) {
     this.panelHeight = height;
@@ -40,16 +42,19 @@ public class ControlPanel extends Menu {
   private void addLabels() {
     add(turn);
     add(target);
+    add(experience);
   }
 
   private void setLabelLocations() {
     turn.setBounds(turnX, turnY, turnWidth, turnHeight);
     target.setBounds(targetX, targetY, targetWidth, targetHeight);
+    experience.setBounds(experienceX, experienceY, experienceWidth, experienceHeight);
   }
 
   private void initLabels() {
     turn = new JLabel();
     target = new JLabel();
+    experience = new JLabel();
   }
 
   void setButtonLocations() {
@@ -111,6 +116,10 @@ public class ControlPanel extends Menu {
 
   public void setTarget(ImageIcon icon) {
     this.target.setIcon(icon);
+  }
+
+  public void setExperience(int experienceAmount) {
+    experience.setText("" + experienceAmount);
   }
 
   public void showUpAttack() {

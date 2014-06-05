@@ -5,4 +5,9 @@ public class ChangeHealthCommand implements Command {
   public void execute() {
 
   }
+
+  @Override
+  public void networkExecute() {
+    execute();
+  }
 }

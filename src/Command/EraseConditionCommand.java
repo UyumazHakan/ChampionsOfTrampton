@@ -5,4 +5,9 @@ public class EraseConditionCommand implements Command {
   public void execute() {
 
   }
+
+  @Override
+  public void networkExecute() {
+    execute();
+  }
 }

@@ -3,7 +3,6 @@ package GUI;
 import Controller.MainMenuController;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class MainMenu extends Menu {
@@ -15,7 +14,7 @@ public class MainMenu extends Menu {
   public MainMenu() {
     super();
     setBackground(Color.white);
-    setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+    setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
     initButtons();
     setButtonLocations();
     addButtons();

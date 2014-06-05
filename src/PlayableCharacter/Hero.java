@@ -10,11 +10,13 @@ public class Hero extends PlayableCharacter {
   private int presentTurn;
   private int id;
   private ImageIcon icon;
+  private int experience;
 
   public Hero(WeaponBehavior weaponBehavior, int id, ImageIcon icon) {
     super(weaponBehavior);
     maxTurn = 20;
     presentTurn = 20;
+    experience = 0;
     this.id = id;
     this.icon = icon;
 
@@ -45,5 +47,11 @@ public class Hero extends PlayableCharacter {
     presentTurn--;
   }
 
+  public void addExperience(int newExperience) {
+    this.experience += newExperience;
+  }
 
+  public int getExperience() {
+    return experience;
+  }
 }

@@ -5,4 +5,9 @@ public class AddConditionCommand implements Command {
   public void execute() {
 
   }
+
+  @Override
+  public void networkExecute() {
+    execute();
+  }
 }

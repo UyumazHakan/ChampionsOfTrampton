@@ -9,9 +9,13 @@ import PlayableCharacter.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameEngine {
   private final int NUMBER_OF_ROOMS = 10;
+  private final int TARGET_KILL_EXPERIENCE = 5;
+  private final int MURDERER_KILL_EXPERIENCE = 2;
+  private final int INNOCENT_KILL_EXPERIENCE = -3;
   private GameScreen screen;
   private Map map;
   private Hero playersHero;
@@ -30,6 +34,7 @@ public class GameEngine {
     updateMapScreen();
     screen.getControlPanel().changeTurn(getCurrentHeroTurn());
     screen.getControlPanel().setTarget(getTargetIcon());
+    screen.getControlPanel().setExperience(getCurrentHeroExperience());
 
   }
 
@@ -44,9 +49,25 @@ public class GameEngine {
     heroes.add(new Warlord(0));
     heroes.add(new Marksman(1));
     heroes.add(new Phantom(2));
-    for (int i = 0; i < numHeroes; i++)
-      heroes.get(i).setTarget(heroes.get((i + 1) % numHeroes));
+    setTargets();
 
+  }
+
+  private void setTargets() {
+    int numHeroes = heroes.size();
+    for (int i = 0; i < numHeroes; i++) {
+      setRandomTarget(heroes.get(i));
+    }
+  }
+
+  private void setRandomTarget(Hero hero) {
+    int numHeroes = heroes.size();
+    Random random = new Random();
+    Hero target = hero;
+    while (target == hero) {
+      target = heroes.get(random.nextInt(numHeroes));
+      new ChangeTargetCommand(hero, target).networkExecute();
+    }
   }
 
   private void spawnHeroes() {
@@ -77,12 +98,10 @@ public class GameEngine {
     int room = playersHero.getRoomNumber();
     if (!haveNorthNeighbor())
       stepUpHero();
-    else {
-      PlayableCharacter neighbor = map.getCharacterAtLocation(x, y - 1, room);
-      new KillCharacterCommand(playersHero, neighbor).networkExecute();
-      new SpawnCommand(neighbor, map).networkExecute();
-    }
+    else
+      killCharacter(x, y - 1, room);
   }
+
 
   public void takeActionDown() {
     int x = playersHero.getX();
@@ -90,11 +109,8 @@ public class GameEngine {
     int room = playersHero.getRoomNumber();
     if (!haveSouthNeighbor())
       stepDownHero();
-    else {
-      PlayableCharacter neighbor = (PlayableCharacter) map.getCharacterAtLocation(x, y + 1, room);
-      new KillCharacterCommand(playersHero, neighbor).networkExecute();
-      new SpawnCommand(neighbor, map).networkExecute();
-    }
+    else
+      killCharacter(x, y + 1, room);
   }
 
   public void takeActionLeft() {
@@ -103,11 +119,8 @@ public class GameEngine {
     int room = playersHero.getRoomNumber();
     if (!haveWestNeighbor())
       stepLeftHero();
-    else {
-      PlayableCharacter neighbor = (PlayableCharacter) map.getCharacterAtLocation(x - 1, y, room);
-      new KillCharacterCommand(playersHero, neighbor).networkExecute();
-      new SpawnCommand(neighbor, map).networkExecute();
-    }
+    else
+      killCharacter(x - 1, y, room);
   }
 
   public void takeActionRight() {
@@ -116,11 +129,27 @@ public class GameEngine {
     int room = playersHero.getRoomNumber();
     if (!haveEastNeighbor())
       stepRightHero();
-    else {
-      PlayableCharacter neighbor = (PlayableCharacter) map.getCharacterAtLocation(x + 1, y, room);
-      new KillCharacterCommand(playersHero, neighbor).networkExecute();
-      new SpawnCommand(neighbor, map).networkExecute();
-    }
+    else
+      killCharacter(x + 1, y, room);
+  }
+
+  private void killCharacter(int x, int y, int room) {
+    PlayableCharacter neighbor = map.getCharacterAtLocation(x, y, room);
+    new KillCharacterCommand(playersHero, neighbor).networkExecute();
+    new SpawnCommand(neighbor, map).networkExecute();
+    gainExperience(neighbor);
+    setRandomTarget(playersHero);
+    setRandomTarget((Hero) neighbor);
+  }
+
+  private void gainExperience(PlayableCharacter neighbor) {
+    if (playersHero.getTarget() == neighbor)
+      new GainExperienceCommand(playersHero, TARGET_KILL_EXPERIENCE).networkExecute();
+    else if (((Hero) neighbor).getTarget() == playersHero)
+      new GainExperienceCommand(playersHero, MURDERER_KILL_EXPERIENCE).networkExecute();
+    else
+      new GainExperienceCommand(playersHero, INNOCENT_KILL_EXPERIENCE).networkExecute();
+    screen.getControlPanel().setExperience(getCurrentHeroExperience());
   }
 
   public boolean haveNorthNeighbor() {
@@ -218,5 +247,9 @@ public class GameEngine {
 
   public ImageIcon getTargetIcon() {
     return playersHero.getTarget().getIcon();
+  }
+
+  public int getCurrentHeroExperience() {
+    return playersHero.getExperience();
   }
 }
