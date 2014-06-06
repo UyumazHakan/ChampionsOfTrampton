@@ -42,24 +42,27 @@ public class Map {
   private void createRoomConnections() {
     for (int i = 0; i < rooms.size(); i++)
       while (rooms.get(i).getNumDoors() < 2)
-        createDoor(i);
+        addDoor(i);
   }
 
-  //TODO Refactor
-  private void createDoor(int roomNumber) {
+  private void addDoor(int roomNumber) {
     int otherRoomNumber = random.nextInt(rooms.size());
     if (otherRoomNumber == roomNumber)
       otherRoomNumber = (otherRoomNumber + 1) % rooms.size();
-    int x1, x2, y1, y2;
     Room room1 = rooms.get(roomNumber);
     Room room2 = rooms.get(otherRoomNumber);
+    Door door = createDoor(roomNumber, otherRoomNumber, room1, room2);
+    room1.addDoor(door);
+    room2.addDoor(door);
+  }
+
+  private Door createDoor(int roomNumber, int otherRoomNumber, Room room1, Room room2) {
+    int x1, x2, y1, y2;
     x1 = random.nextInt(room1.getWidth() - 1);
     y1 = random.nextInt(room1.getHeight() - 1);
     x2 = random.nextInt(room2.getWidth() - 1);
     y2 = random.nextInt(room2.getHeight() - 1);
-    Door door = new Door(x1, y1, x2, y2, roomNumber, otherRoomNumber);
-    room1.addDoor(door);
-    room2.addDoor(door);
+    return new Door(x1, y1, x2, y2, roomNumber, otherRoomNumber);
   }
 
   public void update() {

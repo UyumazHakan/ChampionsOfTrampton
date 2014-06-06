@@ -27,18 +27,31 @@ public class GameEngine {
 
   public GameEngine(GameScreen screen) {
     heroes = new ArrayList<Hero>();
+    this.screen = screen;
     initAllHeroes();
+    setPlayers();
+
+    setScreenSettings();
+    initMap();
+    controlPanelUpdate();
+
+  }
+
+  private void setPlayers() {
     addHeroes(NUMBER_OF_PLAYERS);
     playersHero = heroes.get(currentPlayerID);
-    this.screen = screen;
-    setScreenSettings();
+  }
+
+  private void initMap() {
     map = new MapFactory().createMap(NUMBER_OF_ROOMS, heroes);
     spawnHeroes();
     updateMapScreen();
+  }
+
+  public void controlPanelUpdate() {
     screen.getControlPanel().changeTurn(getCurrentHeroTurn());
     screen.getControlPanel().setTarget(getTargetIcon());
     screen.getControlPanel().setExperience(getCurrentHeroExperience());
-
   }
 
   private void initAllHeroes() {
@@ -61,7 +74,6 @@ public class GameEngine {
     for (int i = 0; i < numHeroes; i++)
       heroes.add(allHeroes.get(i));
     setTargets();
-
   }
 
   private void setTargets() {
@@ -145,7 +157,7 @@ public class GameEngine {
   }
 
   private void killCharacter(int x, int y, int room) {
-    PlayableCharacter neighbor = map.getCharacterAtLocation(x, y, room);
+    Hero neighbor = (Hero)map.getCharacterAtLocation(x, y, room);
     new KillCharacterCommand(playersHero, neighbor).networkExecute();
     new SpawnCommand(neighbor, map).networkExecute();
     gainExperience(neighbor);
@@ -213,10 +225,6 @@ public class GameEngine {
     moveXCharacter(1, playersHero);
   }
 
-  private void moveCharacter(int x, int y, Hero character) {
-    moveXCharacter(x, character);
-    moveYCharacter(y, character);
-  }
 
   private void moveYCharacter(int y, Hero character) {
     Room characterRoom = map.getRoom(character.getRoomNumber());

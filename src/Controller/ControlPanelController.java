@@ -17,7 +17,30 @@ public class ControlPanelController extends MenuController {
   }
 
   public void actionPerformed(ActionEvent e) {
-    String buttonText = ((JButton) e.getSource()).getName();
+    takeAction(((JButton) e.getSource()).getName());
+    updateEngine();
+    updateView();
+
+  }
+
+  private void updateView() {
+    updateControlPanel();
+    updateButtons();
+  }
+
+  private void updateControlPanel() {
+    controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
+    controlPanel.setTarget(gameEngine.getTargetIcon());
+    controlPanel.setExperience(gameEngine.getCurrentHeroExperience());
+  }
+
+  private void updateEngine() {
+    gameEngine.updateMapScreen();
+    gameEngine.resetFocusToFrame();
+    gameEngine.updateCurrentHero();
+  }
+
+  private void takeAction(String buttonText) {
     if (buttonText.equals("UP"))
       gameEngine.takeActionUp();
     else if (buttonText.equals("DOWN"))
@@ -26,14 +49,6 @@ public class ControlPanelController extends MenuController {
       gameEngine.takeActionLeft();
     else if (buttonText.equals("RIGHT"))
       gameEngine.takeActionRight();
-    gameEngine.updateMapScreen();
-    gameEngine.resetFocusToFrame();
-    gameEngine.updateCurrentHero();
-    controlPanel.changeTurn(gameEngine.getCurrentHeroTurn());
-    controlPanel.setTarget(gameEngine.getTargetIcon());
-    controlPanel.setExperience(gameEngine.getCurrentHeroExperience());
-    updateButtons();
-
   }
 
   private void updateButtons() {

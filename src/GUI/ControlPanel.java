@@ -16,7 +16,6 @@ public class ControlPanel extends Menu {
   private int targetLabelHeight = 50, targetLabelWidth = 80, targetLabelX = 500, targetLabelY = 20;
   private int turnLabelHeight = 50, turnLabelWidth = 130, turnLabelX = 300, turnLabelY = 20;
   private int experienceLabelHeight = 50, experienceLabelWidth = 80, experienceLabelX = 300, experienceLabelY = 100;
-  private int panelWidth, panelHeight;
   private JButton up;
   private JButton down;
   private JButton left;
@@ -32,9 +31,7 @@ public class ControlPanel extends Menu {
   private JLabel targetLabel;
   private JLabel experienceLabel;
 
-  public ControlPanel(int width, int height) {
-    this.panelHeight = height;
-    this.panelWidth = width;
+  public ControlPanel() {
     setLayout(null);
     setBackground(Color.white);
     initButtons();

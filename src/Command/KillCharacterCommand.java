@@ -7,17 +7,17 @@ import PlayableCharacter.PlayableCharacter;
  * Created by UyumazHakan on 05.06.2014.
  */
 public class KillCharacterCommand implements Command {
-  private PlayableCharacter killer;
-  private PlayableCharacter victim;
+  private Hero killer;
+  private Hero victim;
 
-  public KillCharacterCommand(PlayableCharacter killer, PlayableCharacter victim) {
+  public KillCharacterCommand(Hero killer, Hero victim) {
     this.killer = killer;
     this.victim = victim;
   }
 
   @Override
   public void execute() {
-    ((Hero) killer).decreaseTurn();
+    killer.decreaseTurn();
   }
 
   public void networkExecute() {

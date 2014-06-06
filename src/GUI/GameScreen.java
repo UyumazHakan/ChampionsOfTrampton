@@ -128,7 +128,7 @@ public class GameScreen extends JFrame {
 
   private void createPanels() {
     pauseMenu = new PauseMenu();
-    controlPanel = new ControlPanel(controlPanelWidth, controlPanelHeight);
+    controlPanel = new ControlPanel();
     mapScreen = new MapScreen();
     mainMenu = new MainMenu();
   }

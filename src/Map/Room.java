@@ -69,6 +69,11 @@ public class Room {
   }
 
   public void eraseCharacters() {
+    teleportAllCharacters();
+    characters.clear();
+  }
+
+  private void teleportAllCharacters() {
     for (PlayableCharacter character : characters) {
       for (Door door : doors) {
         boolean isSameX = door.getXForRoom(roomNumber) == character.getX();
@@ -78,7 +83,6 @@ public class Room {
         }
       }
     }
-    characters.clear();
   }
 
   public void addCharacter(PlayableCharacter newCharacter) {
