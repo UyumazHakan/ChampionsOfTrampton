@@ -16,6 +16,7 @@ public class GameEngine {
   private final int TARGET_KILL_EXPERIENCE = 5;
   private final int MURDERER_KILL_EXPERIENCE = 2;
   private final int INNOCENT_KILL_EXPERIENCE = -3;
+  private final int GAME_FINISH_LIMIT=12;
   private GameScreen screen;
   private Map map;
   private Hero playersHero;
@@ -150,6 +151,12 @@ public class GameEngine {
     else
       new GainExperienceCommand(playersHero, INNOCENT_KILL_EXPERIENCE).networkExecute();
     screen.getControlPanel().setExperience(getCurrentHeroExperience());
+    checkFinishedGame();
+  }
+
+  private void checkFinishedGame() {
+    if(playersHero.getExperience()>=GAME_FINISH_LIMIT)
+      new EndGameCommand(heroes,screen).networkExecute();
   }
 
   public boolean haveNorthNeighbor() {

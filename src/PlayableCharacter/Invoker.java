@@ -6,4 +6,7 @@ public class Invoker extends Hero {
   public Invoker(int id) {
     super(new FistBehavior(), id, null);
   }
+  public String toString(){
+    return "Invoker";
+  }
 }
