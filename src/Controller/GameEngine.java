@@ -16,14 +16,14 @@ public class GameEngine {
   private final int TARGET_KILL_EXPERIENCE = 5;
   private final int MURDERER_KILL_EXPERIENCE = 2;
   private final int INNOCENT_KILL_EXPERIENCE = -3;
-  private final int GAME_FINISH_LIMIT=12;
-  private final int NUMBER_OF_PLAYERS=5;
+  private final int GAME_FINISH_LIMIT = 12;
+  private final int NUMBER_OF_PLAYERS = 5;
   private GameScreen screen;
   private Map map;
   private Hero playersHero;
   private ArrayList<Hero> heroes;
   private ArrayList<Hero> allHeroes;
-  private int currentPlayerID=0;
+  private int currentPlayerID = 0;
 
   public GameEngine(GameScreen screen) {
     heroes = new ArrayList<Hero>();
@@ -58,7 +58,7 @@ public class GameEngine {
   }
 
   private void addHeroes(int numHeroes) {
-    for(int i=0;i<numHeroes;i++)
+    for (int i = 0; i < numHeroes; i++)
       heroes.add(allHeroes.get(i));
     setTargets();
 
@@ -165,8 +165,8 @@ public class GameEngine {
   }
 
   private void checkFinishedGame() {
-    if(playersHero.getExperience()>=GAME_FINISH_LIMIT)
-      new EndGameCommand(heroes,screen).networkExecute();
+    if (playersHero.getExperience() >= GAME_FINISH_LIMIT)
+      new EndGameCommand(heroes, screen).networkExecute();
   }
 
   public boolean haveNorthNeighbor() {

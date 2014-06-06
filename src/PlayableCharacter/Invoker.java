@@ -8,7 +8,8 @@ public class Invoker extends Hero {
   public Invoker(int id) {
     super(new FistBehavior(), id, new ImageIcon("images/invoker.png"));
   }
-  public String toString(){
+
+  public String toString() {
     return "Invoker";
   }
 }

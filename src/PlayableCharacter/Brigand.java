@@ -7,7 +7,7 @@ public class Brigand extends Hero {
     super(new KnifeBehavior(), id, null);
   }
 
-  public String toString(){
+  public String toString() {
     return "Brigand";
   }
 }

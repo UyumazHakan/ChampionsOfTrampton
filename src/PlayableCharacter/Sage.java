@@ -6,7 +6,8 @@ public class Sage extends Hero {
   public Sage(int id) {
     super(new FistBehavior(), id, null);
   }
-  public String toString(){
+
+  public String toString() {
     return "Sage";
   }
 }

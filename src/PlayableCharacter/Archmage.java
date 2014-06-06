@@ -7,7 +7,7 @@ public class Archmage extends Hero {
     super(new FistBehavior(), id, null);
   }
 
-  public String toString(){
+  public String toString() {
     return "Archmage";
   }
 }
