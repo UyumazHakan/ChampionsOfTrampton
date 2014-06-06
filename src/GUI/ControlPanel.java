@@ -6,13 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ControlPanel extends Menu {
-  private int upHeight = 80, upWidth = 50, upX = 120, upY = 10;
-  private int downHeight = 80, downWidth = 50, downX = 120, downY = 110;
+  private int upHeight = 80, upWidth = 70, upX = 120, upY = 10;
+  private int downHeight = 80, downWidth = 70, downX = 120, downY = 110;
   private int leftHeight = 50, leftWidth = 80, leftX = 20, leftY = 75;
-  private int rightHeight = 50, rightWidth = 80, rightX = 190, rightY = 75;
-  private int targetHeight = 100, targetWidth = 100, targetX = 500, targetY = 75;
-  private int turnHeight = 50, turnWidth = 80, turnX = 300, turnY = 70;
+  private int rightHeight = 50, rightWidth = 80, rightX = 210, rightY = 75;
+  private int targetHeight = 100, targetWidth = 100, targetX = 500, targetY = 100;
+  private int turnHeight = 50, turnWidth = 80, turnX = 300, turnY = 40;
   private int experienceHeight = 50, experienceWidth = 80, experienceX = 300, experienceY = 150;
+  private int targetLabelHeight = 50, targetLabelWidth = 80, targetLabelX = 500, targetLabelY = 20;
+  private int turnLabelHeight = 50, turnLabelWidth = 130, turnLabelX = 300, turnLabelY = 20;
+  private int experienceLabelHeight = 50, experienceLabelWidth = 80, experienceLabelX = 300, experienceLabelY = 100;
   private int panelWidth, panelHeight;
   private JButton up;
   private JButton down;
@@ -25,6 +28,9 @@ public class ControlPanel extends Menu {
   private JLabel turn;
   private JLabel target;
   private JLabel experience;
+  private JLabel turnLabel;
+  private JLabel targetLabel;
+  private JLabel experienceLabel;
 
   public ControlPanel(int width, int height) {
     this.panelHeight = height;
@@ -43,18 +49,27 @@ public class ControlPanel extends Menu {
     add(turn);
     add(target);
     add(experience);
+    add(turnLabel);
+    add(targetLabel);
+    add(experienceLabel);
   }
 
   private void setLabelLocations() {
     turn.setBounds(turnX, turnY, turnWidth, turnHeight);
     target.setBounds(targetX, targetY, targetWidth, targetHeight);
     experience.setBounds(experienceX, experienceY, experienceWidth, experienceHeight);
+    turnLabel.setBounds(turnLabelX, turnLabelY, turnLabelWidth, turnLabelHeight);
+    targetLabel.setBounds(targetLabelX, targetLabelY, targetLabelWidth, targetLabelHeight);
+    experienceLabel.setBounds(experienceLabelX, experienceLabelY, experienceLabelWidth, experienceLabelHeight);
   }
 
   private void initLabels() {
     turn = new JLabel();
     target = new JLabel();
     experience = new JLabel();
+    turnLabel = new JLabel("Turns Remaining");
+    targetLabel = new JLabel("Target");
+    experienceLabel = new JLabel("Experience");
   }
 
   void setButtonLocations() {

@@ -17,16 +17,18 @@ public class GameEngine {
   private final int MURDERER_KILL_EXPERIENCE = 2;
   private final int INNOCENT_KILL_EXPERIENCE = -3;
   private final int GAME_FINISH_LIMIT=12;
+  private final int NUMBER_OF_PLAYERS=5;
   private GameScreen screen;
   private Map map;
   private Hero playersHero;
   private ArrayList<Hero> heroes;
-  private int currentPlayerID;
+  private ArrayList<Hero> allHeroes;
+  private int currentPlayerID=0;
 
   public GameEngine(GameScreen screen) {
-    currentPlayerID = 0;
     heroes = new ArrayList<Hero>();
-    addHeroes(3);
+    initAllHeroes();
+    addHeroes(NUMBER_OF_PLAYERS);
     playersHero = heroes.get(currentPlayerID);
     this.screen = screen;
     setScreenSettings();
@@ -39,6 +41,15 @@ public class GameEngine {
 
   }
 
+  private void initAllHeroes() {
+    allHeroes = new ArrayList<Hero>();
+    allHeroes.add(new Warlord(0));
+    allHeroes.add(new Marksman(1));
+    allHeroes.add(new Phantom(2));
+    allHeroes.add(new Champion(3));
+    allHeroes.add(new Invoker(4));
+  }
+
   private void setScreenSettings() {
     screen.setVisible(true);
     screen.setDefaultCloseOperation(GameScreen.EXIT_ON_CLOSE);
@@ -47,9 +58,8 @@ public class GameEngine {
   }
 
   private void addHeroes(int numHeroes) {
-    heroes.add(new Warlord(0));
-    heroes.add(new Marksman(1));
-    heroes.add(new Phantom(2));
+    for(int i=0;i<numHeroes;i++)
+      heroes.add(allHeroes.get(i));
     setTargets();
 
   }
